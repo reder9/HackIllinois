@@ -6,8 +6,7 @@ using UnityEngine.UI;
 public class Reder9 : MonoBehaviour {
 
 
-    public GameObject canvas;
-
+    public GameObject grass;
     public float height;
 
     public GameObject file;
@@ -34,7 +33,7 @@ public class Reder9 : MonoBehaviour {
 
             GameObject temp = (GameObject)Instantiate(file, new Vector3(i *spacing, height,0) , Quaternion.Euler(0, 0, 0));
             temp.name = files[i].FullName;
-            temp.transform.parent = canvas.gameObject.transform;
+            temp.transform.parent = this.gameObject.transform;
             temp.gameObject.GetComponent<FileDisplay>().name = files[i].Name;
 
             string bytes = "Bytes";
@@ -68,23 +67,28 @@ public class Reder9 : MonoBehaviour {
         DirectoryInfo[] folders = info.GetDirectories();
 
         int num = folders.Length;
- 
-        this.transform.localScale = new Vector3(num * spacing, .01f, this.transform.localScale.z);
-        this.transform.position = new Vector3(this.transform.position.x, .01f, this.transform.localScale.z * 5f);
-
-
-        for (int i = 0; i < folders.Length; i++)
+        if (folders.Length < 2)
         {
-
-            GameObject temp = (GameObject)Instantiate(directory,  new Vector3(this.transform.localScale.x * -1 + this.transform.localScale.x *3, height, this.transform.localScale.z  + i + spacing), Quaternion.Euler(0, 0, 0));
-            temp.name = folders[i].FullName;
-            temp.transform.parent = canvas.gameObject.transform;
-            temp.gameObject.GetComponent<DirectoryDisplay>().name = folders[i].Name;
-
+            num = 2;
         }
 
+
+        for (int i = 0; i < num; i++)
+        {
+            for (int j = 0; j < 10; j++)
+            {
+                GameObject a = (GameObject) Instantiate(grass, new Vector3(i*5f, .01f, j*5f), Quaternion.Euler(90,0,0));
+                a.transform.parent = this.gameObject.transform;
+                if (j == 9){
+                      GameObject temp = (GameObject)Instantiate(directory, new Vector3(this.transform.localScale.x * -1 + this.transform.localScale.x * 3, height, 5f), Quaternion.Euler(0, 0, 0));
+                     temp.name = folders[i].FullName;
+                     temp.transform.parent = a.gameObject.transform;
+                     temp.transform.position = a.transform.position + new Vector3(0, height, 0);
+                temp.gameObject.GetComponent<DirectoryDisplay>().name = folders[i].Name;
+                }
+            }
+        }
     }
-    
 	
 	// Update is called once per frame
 	void Update () {

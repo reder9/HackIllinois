@@ -1,10 +1,15 @@
 fileFormatVersion: 2
 guid: 9952aef5404233442ae49124c91c6045
-timeCreated: 1455416421
+timeCreated: 1455965995
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - room: {fileID: 109842, guid: b32d1b81db9822d48abef5ad57b08319, type: 2}
+  - canvas: {instanceID: 0}
+  - tile: {fileID: 176100, guid: b2ffa0ed7b5a4824e8f852be16ff3e17, type: 2}
+  - file: {instanceID: 0}
+  - directory: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
