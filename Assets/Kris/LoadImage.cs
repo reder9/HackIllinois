@@ -3,7 +3,7 @@ using System.Collections;
 
 public class LoadImage : MonoBehaviour {
 
-    string url = "file://C:/picture.JPG";
+    string url = "file://C:/Users/caleb/Desktop/HackIllinois/Assets/Kris/OhNo404.JPG";
     WWW pic;
     // Start a download of the given URL
     // Use this for initialization

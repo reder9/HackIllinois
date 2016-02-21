@@ -205,7 +205,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 133028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 6.34, z: -2}
+  m_LocalPosition: {x: 11.6191435, y: 3.3834942e-18, z: -10.637901}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
   - {fileID: 22458008}
@@ -372,12 +372,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9952aef5404233442ae49124c91c6045, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  room: {fileID: 0}
+  table: {fileID: 198716, guid: 260cfd78ca35a324194a2be5f3e0eec3, type: 2}
+  back: {fileID: 133028}
+  room: {fileID: 109842, guid: b32d1b81db9822d48abef5ad57b08319, type: 2}
   canvas: {fileID: 0}
   destination: 2000
-  height: 2.5
-  file: {fileID: 140232, guid: fda37f125553a4f408852e0e0a4a105c, type: 2}
-  directory: {fileID: 133028}
+  height: 1.5
+  source: 0
+  file: {fileID: 121588, guid: b396875c2ff5ae748a90411e567e1acc, type: 2}
+  directory: {fileID: 172468, guid: 3a60894ba55a72543bf8b4967b9f4772, type: 2}
 --- !u!114 &11468864
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -6717,6 +6720,26 @@ Prefab:
       propertyPath: m_IsTrigger
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: tile
+      value: 
+      objectReference: {fileID: 176100, guid: b2ffa0ed7b5a4824e8f852be16ff3e17, type: 2}
+    - target: {fileID: 0}
+      propertyPath: height
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: file
+      value: 
+      objectReference: {fileID: 172468, guid: 3a60894ba55a72543bf8b4967b9f4772, type: 2}
+    - target: {fileID: 0}
+      propertyPath: directory
+      value: 
+      objectReference: {fileID: 172468, guid: 3a60894ba55a72543bf8b4967b9f4772, type: 2}
+    - target: {fileID: 0}
+      propertyPath: room
+      value: 
+      objectReference: {fileID: 109842, guid: b32d1b81db9822d48abef5ad57b08319, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 133028}

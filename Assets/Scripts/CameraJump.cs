@@ -70,7 +70,7 @@ public class CameraJump : MonoBehaviour {
 					var fps = o.GetComponent<FirstPersonController>();
 					if (fps != null) {
 						if (debug) Debug.Log("Wiping First Person Controller");
-						fps.Start(); // Re initialise and wipe internal values
+						//fps.Start(); // Re initialise and wipe internal values
 					}
 				}
 

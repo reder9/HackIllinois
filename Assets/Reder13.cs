@@ -27,7 +27,7 @@ public class Reder13 : MonoBehaviour {
 
         while (i < running.Length) {
         yield return new WaitForSeconds(waitTime);
-        GameObject parent = (GameObject) Instantiate(process, new Vector3(Random.Range(-20, 20), 1.0f, Random.Range(-20, 20)), Quaternion.identity);
+        GameObject parent = (GameObject) Instantiate(process, new Vector3(Random.Range(-20, 20), 1.0f, Random.Range(10, 30)), Quaternion.identity);
             parent.transform.parent = this.gameObject.transform;
         GameObject child = (GameObject) Instantiate(ui, new Vector3(parent.transform.position.x, 2.5f, parent.transform.position.z), Quaternion.identity);
 

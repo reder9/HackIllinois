@@ -8,11 +8,15 @@ public class Reder9 : MonoBehaviour {
 
     public GameObject grass;
     public float height;
+    public GameObject table;
 
     public GameObject file;
     public GameObject directory;
 
     public float spacing;
+
+    string[] abc = new string[5];
+
 
 	// Use this for initialization
 	void Start () {
@@ -24,42 +28,46 @@ public class Reder9 : MonoBehaviour {
 
     void GenerateFiles(System.Environment.SpecialFolder location) {
 
-
+        int sum = 0;
+        int var = 0;
+        int ls = 0;
+       
         DirectoryInfo info = new DirectoryInfo(System.Environment.GetFolderPath(location));
+
         FileInfo[] files = info.GetFiles();
 
         for (int i = 0; i < files.Length; i++)
         {
+            ls = i;
 
-            GameObject temp = (GameObject)Instantiate(file, new Vector3(i *spacing, height,0) , Quaternion.Euler(0, 0, 0));
-            temp.name = files[i].FullName;
-            temp.transform.parent = this.gameObject.transform;
-            temp.gameObject.GetComponent<FileDisplay>().name = files[i].Name;
-
-            string bytes = "Bytes";
-            float size = (float)files[i].Length;
-
-            if (size >= Mathf.Pow(10, 9))
+            if (i > 25)
             {
-
-                size /= Mathf.Pow(10, 9);
-                bytes = "GB";
+                ls = i-25;
+                var++;
             }
 
-            else if (size >= Mathf.Pow(10, 6))
+           
+            if ((i % 5 == 0 && i != 0 )|| i == files.Length-1 )
             {
 
-                size /= Mathf.Pow(10, 6);
-                bytes = "MB";
+               
+               GameObject c = (GameObject) Instantiate(table, new Vector3(i, 1, i), Quaternion.identity);
+               c.transform.localPosition = new Vector3(this.transform.localScale.x +2*(ls+sum), 0, 5 + 1* var);
+                c.transform.parent = this.transform;
+               
+                table.GetComponent<table>().files[0] = abc[0];
+                table.GetComponent<table>().files[1] = abc[1];
+                table.GetComponent<table>().files[2] = abc[2];
+                table.GetComponent<table>().files[3] = abc[3];
+                table.GetComponent<table>().files[4] = abc[4];
+                abc = new string[5];
+                sum++;
             }
 
-            else if (size >= Mathf.Pow(10, 3))
-            {
+                
+                abc[(i%5)] = files[i].FullName;
+               ;
 
-                size /= Mathf.Pow(10, 3);
-                bytes = "KB";
-            }
-            temp.gameObject.GetComponent<FileDisplay>().size = System.Math.Round(size, 2).ToString() + " " + bytes;
            
         }
 
@@ -77,13 +85,13 @@ public class Reder9 : MonoBehaviour {
         {
             for (int j = 0; j < 10; j++)
             {
-                GameObject a = (GameObject) Instantiate(grass, new Vector3(i*5f, .01f, j*5f), Quaternion.Euler(90,0,0));
-                a.transform.parent = this.gameObject.transform;
+                GameObject b= (GameObject) Instantiate(grass, new Vector3(i*5f, .01f, j*5f), Quaternion.Euler(90,0,0));
+                b.transform.parent = this.gameObject.transform;
                 if (j == 9){
                       GameObject temp = (GameObject)Instantiate(directory, new Vector3(this.transform.localScale.x * -1 + this.transform.localScale.x * 3, height, 5f), Quaternion.Euler(0, 0, 0));
                      temp.name = folders[i].FullName;
-                     temp.transform.parent = a.gameObject.transform;
-                     temp.transform.position = a.transform.position + new Vector3(0, height, 0);
+                     temp.transform.parent = b.gameObject.transform;
+                     temp.transform.position = b.transform.position + new Vector3(0, height, 0);
                 temp.gameObject.GetComponent<DirectoryDisplay>().name = folders[i].Name;
                 }
             }

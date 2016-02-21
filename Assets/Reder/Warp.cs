@@ -2,66 +2,102 @@
 using System.Collections;
 using System.IO;
 
-public class Warp : MonoBehaviour
-{
+public class Warp : MonoBehaviour {
 
+    public GameObject table;
+
+    public GameObject back;
 
     public GameObject room;
 
     public GameObject canvas;
-    public GameObject tile;
+
     public float destination;
     public float height;
+
+    public float source;
+
 
     public GameObject file;
     public GameObject directory;
 
-    private int i = 0;
-    private int j = 0;
+    private int i=0;
+    private int j=0;
 
+    
     private FileInfo[] files;
     private DirectoryInfo[] directories;
+    
 
-    // Use this for initialization
-    void Start()
-    {
-
+	// Use this for initialization
+	void Start () {
+	
         canvas = GameObject.FindGameObjectWithTag("Canvas");
-        room = GameObject.FindGameObjectWithTag("BonusRoom");
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
+       
+	}
+	
+	// Update is called once per frame
+	void Update () {
+	
+	}
 
 
     void OnTriggerEnter(Collider other)
     {
 
 
-        if (this.name != "Home")
+        if (other.tag == "Player")
         {
-            GenerateFiles();
-        }
 
-        if (room != null)
-        {
+
+            if (room != null)
+            {
+
+                Destroy(GameObject.FindGameObjectWithTag("BonusRoom"));
+            }
+
+            room = (GameObject)Instantiate(room, new Vector3(destination, 0, 0), Quaternion.identity);
+            room.transform.parent = canvas.transform;
             rescaleRoom();
+
+
+            if (this.name != "Home")
+            {
+                GenerateFiles();
+
+                GameObject temp = (GameObject)Instantiate(directory, new Vector3(destination, height, -5), Quaternion.identity);
+                temp.name = "Home";
+
+            }
+
+            else
+            {
+                other.transform.parent.transform.position = new Vector3(0, height, 0);
+                return;
+            }
+
+
+            //Instantiate(back, new Vector3(destination, 0, -3f), Quaternion.identity);
+            other.transform.parent.transform.position = new Vector3(destination, height, 0);
         }
-
-        other.gameObject.transform.position = new Vector3(destination, height, 0);
-
     }
 
 
     void rescaleRoom()
     {
 
-        this.room.transform.localScale = new Vector3(10, 2, 10);
+        DirectoryInfo info = new DirectoryInfo(this.gameObject.name);
+        DirectoryInfo[] dir = info.GetDirectories();
 
+        if (dir.Length > 2)
+        {
+            this.room.transform.localScale = new Vector3(dir.Length, 2, dir.Length);
+        }
+
+        else
+        {
+            this.room.transform.localScale = new Vector3(5, 2, 5);
+        }
     }
 
 
@@ -69,63 +105,75 @@ public class Warp : MonoBehaviour
     void GenerateFiles()
     {
 
-
+        string[] abc = new string[5];
         DirectoryInfo info = new DirectoryInfo(this.gameObject.name);
         files = info.GetFiles();
-
+        int ls;
+        int var = 0;
+        int sum = 0;
         for (int i = 0; i < files.Length; i++)
         {
-            GameObject temp = (GameObject)Instantiate(file, new Vector3(destination - this.room.transform.localScale.x / 2 + i * height, 0), Quaternion.Euler(0, 0, 0));
-            temp.name = files[i].FullName;
-            temp.transform.parent = canvas.gameObject.transform;
-            temp.gameObject.GetComponent<FileDisplay>().name = files[i].Name;
+            ls = i;
 
-            string bytes = "Bytes";
-            float size = (float)files[i].Length;
-
-            if (size >= Mathf.Pow(10, 9))
+            if (i > 25)
             {
-
-                size /= Mathf.Pow(10, 9);
-                bytes = "GB";
+                ls = i - 25;
+                var++;
             }
 
-            else if (size >= Mathf.Pow(10, 6))
+
+            if ((i % 5 == 0 && i != 0) || i == files.Length - 1)
             {
 
-                size /= Mathf.Pow(10, 6);
-                bytes = "MB";
+                print("Makin Files...");
+
+                GameObject c = (GameObject)Instantiate(table, new Vector3(i, 1, i), Quaternion.identity);
+                c.transform.localPosition = new Vector3(destination + transform.localScale.x + 2 * (ls + sum), 0, 5 + 1 * var);
+                c.transform.parent = this.transform;
+
+                table.GetComponent<table>().files[0] = abc[0];
+                table.GetComponent<table>().files[1] = abc[1];
+                table.GetComponent<table>().files[2] = abc[2];
+                table.GetComponent<table>().files[3] = abc[3];
+                table.GetComponent<table>().files[4] = abc[4];
+                abc = new string[5];
+                sum++;
             }
 
-            else if (size >= Mathf.Pow(10, 3))
-            {
 
-                size /= Mathf.Pow(10, 3);
-                bytes = "KB";
-            }
+            abc[(i % 5)] = files[i].FullName;
+            ;
 
-            temp.gameObject.GetComponent<FileDisplay>().size = System.Math.Round(size, 2).ToString() + " " + bytes;
+
         }
-
 
         DirectoryInfo[] folders = info.GetDirectories();
-   
+      
+        int k = 0;
 
-        for (int i = 0; i < folders.Length; i++)
-        {
-            for (int j = 0; j < 10; j++)
+        
+            k = 0;
+            for (int i = 0; i < folders.Length; i++)
             {
-                GameObject a = (GameObject)Instantiate(tile, new Vector3(i * 5f, .01f, j * 5f), Quaternion.Euler(90, 0, 0));
-                a.transform.parent = this.gameObject.transform;
-                if (j == 9)
+
+                int xOff = i;
+
+                if (i > room.transform.localScale.x - 1)
                 {
-                    GameObject temp = (GameObject)Instantiate(directory, new Vector3(this.transform.localScale.x * -1 + this.transform.localScale.x * 3, height, 5f), Quaternion.Euler(0, 0, 0));
-                    temp.name = folders[i].FullName;
-                    temp.transform.parent = a.gameObject.transform;
-                    temp.transform.position = a.transform.position + new Vector3(0, height, 0);
-                    temp.gameObject.GetComponent<DirectoryDisplay>().name = folders[i].Name;
+                    xOff = 0;
+                    k++;
                 }
-            }
+
+
+                GameObject temp = (GameObject)Instantiate(directory, new Vector3(destination - this.transform.localScale.x / 2 + i * height, k), Quaternion.Euler(0, 0, 0));
+                temp.name = folders[i].FullName;
+                temp.transform.parent = room.gameObject.transform;
+                temp.transform.localPosition = new Vector3((room.transform.localScale.x ) / -2 + xOff + .5f, height, (room.transform.localScale.z  / 2f) - 1.75f - k);
+                temp.gameObject.GetComponent<DirectoryDisplay>().name = folders[i].Name;
+
+            
+
         }
     }
+
 }

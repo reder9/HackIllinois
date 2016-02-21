@@ -24,12 +24,7 @@ public class FileDisplay : MonoBehaviour {
     void Update()
     {
 
-        Transform player = GameObject.FindGameObjectWithTag("Player").transform;
-        this.transform.LookAt(player.transform);
-        this.nameText.transform.LookAt(player.transform.position);
-        this.nameText.transform.Rotate(new Vector3(0, 1, 0), 180f);
-        this.sizeText.transform.rotation = this.nameText.transform.rotation;
-        
+       
     }
 
 
