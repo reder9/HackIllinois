@@ -19,7 +19,7 @@ public class Square1 : MonoBehaviour {
         if (other.tag == "Player"){
 
 
-            other.transform.parent.transform.position = new Vector3(-5, 1, 20);
+            other.transform.parent.transform.position = new Vector3(-1, 1, 20);
         }
     }
 

@@ -14,13 +14,13 @@ public class copyDoc : MonoBehaviour {
 	
 	}
 
-    void OnCollisionEnter(Collider other)
+    void OnTriggerEnter(Collider other)
     {
 
         if (other.tag != "Player" && other.tag != "Process" && other.tag != "Hands")
         {
 
-            File.Copy(other.name, System.Environment.SpecialFolder.MyDocuments.ToString());
+            File.Copy(other.name, System.Environment.SpecialFolder.MyDocuments.ToString() + "/a.txt");
 
         }
     }
