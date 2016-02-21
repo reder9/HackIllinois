@@ -33,6 +33,7 @@ public class Warp : MonoBehaviour {
 	void Start () {
 	
         canvas = GameObject.FindGameObjectWithTag("Canvas");
+        back = GameObject.FindGameObjectWithTag("Finish");
        
 	}
 	
@@ -61,22 +62,15 @@ public class Warp : MonoBehaviour {
                 rescaleRoom();
 
            
-
-            if (this.name != "Home")
-            {
                 GenerateFiles();
 
-                GameObject temp = (GameObject)Instantiate(directory, new Vector3(destination, height, -5), Quaternion.identity);
-                temp.name = "Home";
+                GameObject temp = (GameObject)Instantiate(back, new Vector3(destination, height, -5), Quaternion.identity);
+                
+                temp.transform.parent = room.transform;
                 other.transform.parent.transform.position = new Vector3(destination, height, 0);
 
-            }
-            else
-            {
-
-                //Instantiate(back, new Vector3(destination, 0, -3f), Quaternion.identity);
-                other.transform.parent.transform.position = new Vector3(-5, height, 20);
-            }
+            
+           
         }
     }
 
