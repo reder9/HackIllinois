@@ -8,13 +8,17 @@ using System.Collections;
 
 public class Wander : MonoBehaviour
 {
+
+    public Material[] style;
+
     public float speed = 5;
     float heading;
     private Rigidbody rb;
    
     void Awake()
     {
-       
+        this.gameObject.GetComponent<Renderer>().material = style[Random.RandomRange(0, style.Length-1)];
+
         rb = this.GetComponent<Rigidbody>();
         // Set random initial rotation
         heading = Random.Range(0, 360);

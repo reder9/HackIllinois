@@ -777,9 +777,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 006d6f5901cc2734eb7d4268805e4dd5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walls: []
+  walls:
+  - {fileID: 2100000, guid: 00343d49c7d05416cb4a5bddf12aa90d, type: 2}
+  - {fileID: 2100000, guid: 1e4b3bb4c14f3a04eb243b5f904c3ccd, type: 2}
+  - {fileID: 2100000, guid: 6cbab4e45d684244e9f4a1336aa04b2b, type: 2}
   floors:
-  - {fileID: 2100000, guid: 005999b6cd48f426a94f0e0f28fd6be7, type: 2}
+  - {fileID: 2100000, guid: c1efa33fde579624c919fc3840cae588, type: 2}
+  - {fileID: 2100000, guid: d28988b870f7278479794af47a5ebdb5, type: 2}
+  - {fileID: 2100000, guid: 98de4de62cc633a418f2698936bef067, type: 2}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

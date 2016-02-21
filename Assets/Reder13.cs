@@ -27,7 +27,7 @@ public class Reder13 : MonoBehaviour {
 
         while (i < running.Length) {
         yield return new WaitForSeconds(waitTime);
-        GameObject parent = (GameObject) Instantiate(process, new Vector3(Random.Range(-20, 20), 1.0f, Random.Range(10, 30)), Quaternion.identity);
+        GameObject parent = (GameObject) Instantiate(process, new Vector3(Random.Range(0, 10), 1.0f, Random.Range(10, 15)), Quaternion.identity);
             parent.transform.parent = this.gameObject.transform;
         GameObject child = (GameObject) Instantiate(ui, new Vector3(parent.transform.position.x, 2.5f, parent.transform.position.z), Quaternion.identity);
 
@@ -35,6 +35,7 @@ public class Reder13 : MonoBehaviour {
             child.gameObject.transform.parent = parent.gameObject.transform;
             child.GetComponent<ProcessDisplay>().name = running[i].ProcessName;
             child.GetComponent<ProcessDisplay>().pid = "PID: " + running[i].Id.ToString();
+
 
             i++;
          }

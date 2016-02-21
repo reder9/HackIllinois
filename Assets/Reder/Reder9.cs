@@ -9,7 +9,9 @@ public class Reder9 : MonoBehaviour {
     public GameObject grass;
     public float height;
     public GameObject table;
-
+    public GameObject rightwall;
+    public GameObject leftwall;
+    public GameObject endwall;
     public GameObject file;
     public GameObject directory;
 
@@ -79,7 +81,9 @@ public class Reder9 : MonoBehaviour {
         {
             num = 2;
         }
-
+        leftwall.transform.localScale = new Vector3(num, this.transform.localScale.y, this.transform.localScale.z);
+        rightwall.transform.localScale = new Vector3(num, this.transform.localScale.y, this.transform.localScale.z);
+        //endwall.transform.localPosition = new Vector3(num, this.transform.localScale.y, this.transform.localScale.z);
 
         for (int i = 0; i < num; i++)
         {
