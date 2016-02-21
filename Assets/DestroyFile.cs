@@ -22,18 +22,11 @@ public class DestroyFile : MonoBehaviour {
         {
 
             Instantiate(exp, exp.transform.position, exp.transform.rotation);
+            
             print(other.name + "getting deleted");
 
-            try
-            {
-                File.Delete(this.name);
+                File.Delete(other.name);
 
-            }
-           
-            catch (IOException e)
-            {
-               print("The process failed: {0}");
-            }
             
             Destroy(other.gameObject);
         }

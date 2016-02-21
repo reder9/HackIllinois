@@ -56,10 +56,11 @@ public class Warp : MonoBehaviour {
                 Destroy(GameObject.FindGameObjectWithTag("BonusRoom"));
             }
 
-            room = (GameObject)Instantiate(room, new Vector3(destination, 0, 0), Quaternion.identity);
-            room.transform.parent = canvas.transform;
-            rescaleRoom();
+                room = (GameObject)Instantiate(room, new Vector3(destination, 0, 0), Quaternion.identity);
+                room.transform.parent = canvas.transform;
+                rescaleRoom();
 
+           
 
             if (this.name != "Home")
             {
@@ -67,18 +68,15 @@ public class Warp : MonoBehaviour {
 
                 GameObject temp = (GameObject)Instantiate(directory, new Vector3(destination, height, -5), Quaternion.identity);
                 temp.name = "Home";
+                other.transform.parent.transform.position = new Vector3(destination, height, 0);
 
             }
-
             else
             {
-                other.transform.parent.transform.position = new Vector3(0, height, 0);
-                return;
+
+                //Instantiate(back, new Vector3(destination, 0, -3f), Quaternion.identity);
+                other.transform.parent.transform.position = new Vector3(-5, height, 20);
             }
-
-
-            //Instantiate(back, new Vector3(destination, 0, -3f), Quaternion.identity);
-            other.transform.parent.transform.position = new Vector3(destination, height, 0);
         }
     }
 
@@ -113,6 +111,8 @@ public class Warp : MonoBehaviour {
         int sum = 0;
         for (int i = 0; i < files.Length; i++)
         {
+
+            print(files[i].Name);
             ls = i;
 
             if (i > 25)
@@ -128,7 +128,7 @@ public class Warp : MonoBehaviour {
                 print("Makin Files...");
 
                 GameObject c = (GameObject)Instantiate(table, new Vector3(i, 1, i), Quaternion.identity);
-                c.transform.localPosition = new Vector3(destination + transform.localScale.x + 2 * (ls + sum), 0, 5 + 1 * var);
+                c.transform.localPosition = new Vector3(destination +(1+sum), 0, 5 + 1 * var);
                 c.transform.parent = this.transform;
 
                 table.GetComponent<table>().files[0] = abc[0];

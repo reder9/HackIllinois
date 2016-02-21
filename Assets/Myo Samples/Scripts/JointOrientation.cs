@@ -6,6 +6,8 @@ using Pose = Thalmic.Myo.Pose;
 using UnlockType = Thalmic.Myo.UnlockType;
 using VibrationType = Thalmic.Myo.VibrationType;
 
+
+
 // Orient the object to match that of the Myo armband.
 // Compensate for initial yaw (orientation about the gravity vector) and roll (orientation about
 // the wearer's arm) by allowing the user to set a reference orientation.
@@ -16,6 +18,7 @@ public class JointOrientation : MonoBehaviour
     // This object must have a ThalmicMyo script attached.
     public GameObject myo = null;
 
+    public GameObject player;
     // A rotation that compensates for the Myo armband's orientation parallel to the ground, i.e. yaw.
     // Once set, the direction the Myo armband is facing becomes "forward" within the program.
     // Set by making the fingers spread pose or pressing "r".
@@ -58,7 +61,7 @@ public class JointOrientation : MonoBehaviour
             // vector of the rotation with Z = 1 when the wearer's arm is pointing in the reference direction.
             _antiYaw = Quaternion.FromToRotation (
                 new Vector3 (myo.transform.forward.x, 0, myo.transform.forward.z),
-                new Vector3 (1, 0, 0)
+               player.transform.forward
             );
 
             // _referenceRoll represents how many degrees the Myo armband is rotated clockwise
